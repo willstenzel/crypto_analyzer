@@ -1,17 +1,6 @@
-===============
+
 Crypto_Anazyler
-===============
 
-
-.. image:: https://img.shields.io/pypi/v/cryptoanazylerproject.svg
-        :target: https://pypi.python.org/pypi/cryptoanazylerproject
-
-.. image:: https://img.shields.io/travis/wstenzel/cryptoanazylerproject.svg
-        :target: https://travis-ci.org/wstenzel/cryptoanazylerproject
-
-.. image:: https://readthedocs.org/projects/cryptoanazylerproject/badge/?version=latest
-        :target: https://cryptoanazylerproject.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
 
 Machine Learning algorithmic analysis for Crytpocurrencies
 
@@ -30,6 +19,7 @@ Machine Learning algorithmic analysis for Crytpocurrencies
 
 
 ## Authors
+
 Will Stenzel - [Github](https://github.com/wstenzel)
 
 Shivam Kollur - [Github](https://github.com/srkollur)
