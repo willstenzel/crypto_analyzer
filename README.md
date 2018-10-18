@@ -1,7 +1,43 @@
-termproject
-==============================
+===============
+Crypto_Anazyler
+===============
 
-Tools for FIW as sample for term project.
+
+.. image:: https://img.shields.io/pypi/v/cryptoanazylerproject.svg
+        :target: https://pypi.python.org/pypi/cryptoanazylerproject
+
+.. image:: https://img.shields.io/travis/wstenzel/cryptoanazylerproject.svg
+        :target: https://travis-ci.org/wstenzel/cryptoanazylerproject
+
+.. image:: https://readthedocs.org/projects/cryptoanazylerproject/badge/?version=latest
+        :target: https://cryptoanazylerproject.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+Machine Learning algorithmic analysis for Crytpocurrencies
+
+**Version 0.1**
+
+## Installation
+
+
+## Todos
+- Draft API Skeleton
+- Implement data processing components
+
+
+## Experiments
+- TODO
+
+
+## Authors
+Will Stenzel - [Github](https://github.com/wstenzel)
+
+Shivam Kollur - [Github](https://github.com/srkollur)
+
+Max Hopley - [Github](https://github.com/mhopley)
+
+
+
 
 Project Organization
 ------------
@@ -31,7 +67,7 @@ Project Organization
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
     │                         generated with `pip freeze > requirements.txt`
     │
-    ├── src                <- Source code for use in this project.
+    ├── cryptoanalyzer     <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
     │   ├── data           <- Scripts to download or generate data
@@ -47,15 +83,11 @@ Project Organization
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
+    └──
 
 
---------
 
-Version Tracker
-------------
 
-0.1.1   Created repo and started Github
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+    * Free software: MIT license
+    * Documentation: https://cryptoanazylerproject.readthedocs.io.
