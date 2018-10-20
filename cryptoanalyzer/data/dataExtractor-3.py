@@ -2,14 +2,17 @@
 
 import numpy as np
 import pandas as pd
+pd.core.common.is_list_like = pd.api.types.is_list_like
 from pandas_datareader import data
 import talib
+import fix_yahoo_finance as yf
+yf.pdr_override()
 
 def getCoinData(symbol, start, end):
     """Param:
         symbol: string type, yahoo finance ticker for coin
-        start: string type, start date for pull (yyyy/mm/dd)
-        end: string type, end date for pull (yyyy/mm/dd)
+        start: string type, start date for pull (yyyy-mm-dd)
+        end: string type, end date for pull (yyyy-mm-dd)
 
        Returns: Dataframe of Open, High, Low, Close, Adj. Close and Volume
                 with index representing each trading day"""
@@ -18,6 +21,23 @@ def getCoinData(symbol, start, end):
     coin_data = coin_data.rename(columns={'Adj Close': 'Adj. Close'})
 
     return coin_data
+
+def pctChangeData(symbol, start, end):
+    """Param:
+        symbol: string type, yahoo finance ticker for coin
+        start: string type, start date for pull (yyyy-mm-dd)
+        end: string type, end date for pull (yyyy-mm-dd)
+
+       Returns: Dataframe of percent changes in Adj. Close"""
+    
+    coin_data = data.get_data_yahoo(symbol, start, end)
+    coin_data = coin_data.rename(columns={'Adj Close': 'Adj. Close'})
+
+    toReturn = pd.DataFrame(coin_data['Adj. Close'])
+    toReturn = toReturn.pct_change()
+    toReturn = toReturn.rename(columns={'Adj. Close': 'Pct. Change'})
+    toReturn = toReturn * 100
+    return toReturn
 
 def removeDifferentDates(df1, df2):
     """Param:
@@ -221,6 +241,14 @@ def generateTechnicalDataframe(coin_dataframe):
     return TA_df
 
 def generateLabels(coin_dataframe, days):
+    """Param:
+    coin_dataframe: Dataframe type, exact same format as output of getCoinData
+    days: int type, the number of days in the future to check the price at
+
+    Returns: a dataframe of 1s and 0s, with index representing a column of days,
+             1 representing that the crypto value was up after however many days were specified,
+             and 0 representing that the value was down"""
+    
     listUpDown = []
     DateList = []
 
@@ -243,10 +271,48 @@ def generateLabels(coin_dataframe, days):
         index = index + 1
         later = later + 1
 
-    UpDownDF = pd.DataFrame({'Date': DateList, 'Up/Down': listUpDown})
+    UpDownDF = pd.DataFrame({'Date': DateList, 'Up or Down?': listUpDown})
 
     UpDownDF = UpDownDF.set_index('Date')
 
     return UpDownDF
+
+def dropNAValues(df):
+    """Param:
+    df: Dataframe type
+
+    Returns: df with rows containing NaN dropped"""
+    return df.dropna(axis = 0)
+
+def createCompleteDataset(symbol, start, end, days):
+    """Param:
+       symbol: string type, yahoo finance ticker for coin
+       start: string type, start date for pull (yyyy-mm-dd)
+       end: string type, end date for pull (yyyy-mm-dd)
+       days: int type, the number of days in the future to check the price at       
+
+       Returns: df, complete data set of all technical indicator values (features) and whether or
+                not coin appreciated in value (1 - appreciated, 0 - did not appreciate) over
+                number of days (given by "days") each index of dataframe represents each trading day"""
     
+    df = getCoinData(symbol, start, end)
+    labels = (removeDifferentDates(generateLabels(df, days), generateTechnicalDataframe(df))[0])
+    features = (removeDifferentDates(generateLabels(df, days), generateTechnicalDataframe(df))[1])
+    toReturn = pd.concat([features, labels], axis = 1)
+    toReturn = dropNAValues(toReturn)
+    return toReturn
+
+"""If you get a "RemoteDataError, just run it again until you don't, Yahoo Finance's API
+doesn't exist anymore and the backend workaround this code uses is finnicky. You just
+have to keep hitting run until it works."""
+
+"""The line below generates the complete dataset of features for bitcoin from 12/31/2007 to
+12/31/2017 as well as the labels (a day having a 1 means bitcoin was up 10 days later, a 0 means
+it was down 10 days later."""
+
+
+
+
     
+
+
