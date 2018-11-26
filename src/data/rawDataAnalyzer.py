@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == "__main__":
-    path_in = '/Users/stenzel/Documents/EECE2300/cryptoanalyzer/cryptoanalyzer/data/raw/Bittrex_BTCUSD_1h.csv'
+    path_in = '/Users/stenzel/Documents/EECE2300/src/src/data/raw/Bittrex_BTCUSD_1h.csv'
 
     sample_data = pd.read_csv(path_in, skiprows=1)
     print(sample_data.head())
