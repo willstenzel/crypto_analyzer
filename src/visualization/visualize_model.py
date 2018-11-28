@@ -26,7 +26,7 @@ def graph_price_seniment(sentiment, price):
     fig, ax1 = plt.subplots()
 
     # Plot Line
-    ax1.plot(price.index, price.values, 'r-')
+    ax1.plot(price.index, price, 'r-')
     # Set the x-axis label
     ax1.set_xlabel('Time')
 
@@ -36,10 +36,13 @@ def graph_price_seniment(sentiment, price):
     # Set up ax2 to be the second y axis with x shared
     ax2 = ax1.twinx()
     # Plot a Bar
-    ax2.bar(sentiment.index, sentiment, width=5, alpha=0.3)
-
+    ax2.bar(sentiment.index, sentiment, width=0.04, alpha=.5)
+    ax2.set_ylim(-300, 300)
 
     plt.show()
+
+    print(price)
+    print(sentiment)
 
 
 
