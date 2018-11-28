@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import re
 import matplotlib.pyplot as plt
@@ -8,7 +7,7 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def import_tweets(filename):
     """
-    This method creates a data frame with tweet datetime and text
+    This method creates a time series data frame with tweet date time and text
     :param filename: the name of the file containing the tweets (as csv)
     :return: A data frame containing the date and time, the text of the tweet
     """
@@ -55,7 +54,7 @@ def analyze_tweets(tweet_dataset):
         text = str(row['Text'])
         score = sid.polarity_scores(text)
         sentiment_scores.append(score['compound'])
-    tweet_dataset['sentiment'] = sentiment_scores
+    tweet_dataset['Sentiment'] = sentiment_scores
     return tweet_dataset
 
 def get_hourly_sentiment(tweet_dataset):
@@ -73,7 +72,7 @@ def get_hourly_sentiment(tweet_dataset):
 if __name__ == "__main__":
     # apply the preprocess function for all the tweets in the dataset
     # tweet_dataset = import_tweets("/Users/stenzel/Documents/EECE2300/cryptoanalyzer/src/data/raw/bitcoin-twitter.csv")
-    # tweet_dataset['text'] = tweet_dataset['text'].apply(preprocess_tweet)
+    # tweet_dataset['Text'] = tweet_dataset['Text'].apply(preprocess_tweet)
     # tweet_dataset = analyze_tweets(tweet_dataset)
 
     #tweet_dataset.to_csv('twitter-data-with-sentiment.csv', sep=',')
