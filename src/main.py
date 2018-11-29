@@ -30,10 +30,15 @@ price_data = args.price_data
 
 ## For testing purposes
 tweet_df = pd.read_csv("data/Itermediate/twitter-data-with-sentiment.csv", encoding='utf-8')
+# data set from: https://www.kaggle.com/gwhittington/bitcointwitter
 tweet_df = tweet_df.set_index(pd.DatetimeIndex(tweet_df['Date']))
 tweet_df = twitterAnalyzer.get_hourly_sentiment(tweet_df)
 price_df = pd.read_csv("data/Itermediate/cleaned_price_data.csv", encoding='utf-8')
 price_df = price_df.set_index(pd.DatetimeIndex(price_df['Date']))
+price_df = price_df.drop('Date', 1)
+
+print(tweet_df)
+print(price_df)
 
 # Evaluate model
 visualize_model.graph_price_seniment(tweet_df, price_df)

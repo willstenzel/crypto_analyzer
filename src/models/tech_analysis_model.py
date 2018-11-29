@@ -1,8 +1,8 @@
-import dataExtractor
+#import dataExtractor
 import pandas as pd
 import sklearn
 import numpy as np
-from sklearn import preprocessing, cross_validation, neighbors
+from sklearn import preprocessing, neighbors
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.ensemble import BaggingClassifier
@@ -14,6 +14,8 @@ from sklearn.metrics import recall_score
 from sklearn.metrics import log_loss
 from sklearn.metrics import f1_score
 from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import train_test_split
+
 
 ##Data_df = (dataExtractor.createCompleteDataset("BTC-USD", "2007-12-31", "2017-12-31", 10))
 ##coin_data = (dataExtractor.getCoinData("BTC-USD", "2007-12-31", "2017-12-31"))
@@ -25,7 +27,7 @@ from sklearn.metrics import roc_auc_score
 
 ##writer.save()
 
-XLdf = pd.ExcelFile("coinDataFrame.xlsx")
+XLdf = pd.ExcelFile("/Users/stenzel/Documents/EECE2300/cryptoanalyzer/src/data/raw/coinDataFrame.xlsx")
 
 Data_df = XLdf.parse("DataFrame")
 
@@ -42,7 +44,7 @@ f1Total = 0
 
 i = 0
 while i < 100:
-    X_train, X_test, Y_train, Y_test = cross_validation.train_test_split(X, Y, test_size=0.2)
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
     clf = KNeighborsClassifier()
 

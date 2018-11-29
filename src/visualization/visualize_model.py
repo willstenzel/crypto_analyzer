@@ -37,7 +37,7 @@ def graph_price_seniment(sentiment, price):
     ax2 = ax1.twinx()
     # Plot a Bar
     ax2.bar(sentiment.index, sentiment, width=0.04, alpha=.5)
-    ax2.set_ylim(-300, 300)
+    ax2.set_ylim(sentiment.min() * 1.1, sentiment.max() * 1.1)
 
     plt.show()
 

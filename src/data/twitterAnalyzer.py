@@ -61,9 +61,12 @@ def get_hourly_sentiment(tweet_dataset):
     """
     Sums the sentiment score by hour
     :param tweet_dataset: the dataframe that we want to find the hourly sentiment score of
-    :return: the dataframe with the scores sumed over the hour
+    :return: the dataframe with the mean score for the hour
     """
-    return tweet_dataset.resample('H').sum()
+
+    return tweet_dataset.resample('H').mean()
+
+
 
 
 
