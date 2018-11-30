@@ -11,7 +11,7 @@ def import_priceData(filename):
 
     price_df = price_df.set_index(pd.to_datetime(price_df['Date'], format='%Y-%m-%d %I-%p'))
 
-    price_df.drop(price_df.columns.difference(['Open']), 1, inplace=True)
+    price_df.drop(price_df.columns.difference(['Close']), 1, inplace=True)
 
     price_df.columns = ['Price']
 
@@ -21,9 +21,9 @@ if __name__ == "__main__":
 
     price_dataset = import_priceData("/Users/stenzel/Documents/EECE2300/cryptoanalyzer/src/data/raw/Bittrex_BTCUSD_1h.csv")
 
-    #price_dataset.to_csv('cleaned_price_data.csv', sep=',')
+    price_dataset.to_csv('cleaned_price_data.csv', sep=',')
 
-    plt.plot(price_dataset)
+    # plt.plot(price_dataset)
     #plt.show()
     #plt.close()
 

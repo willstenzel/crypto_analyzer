@@ -15,8 +15,12 @@ def graph_price_seniment(sentiment, price):
     # reverse the price data so that it is in ascending order like the sentiment data
     price = price.iloc[::-1]
 
-    # keep rows that have the share the same date times
-    price = price[sentiment.index[0]:sentiment.index[-1]]
+    # find the minimum start time between the sentiment and the price data
+    startTime = max(sentiment.index[0], price.index[0])
+
+    # keep only rows that have the share the same date times
+    price = price[startTime:sentiment.index[-1]]
+    sentiment = sentiment[startTime:]
 
     # scale the sentiment to better match the price values
 
