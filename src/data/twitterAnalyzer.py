@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import re
 import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -14,8 +15,8 @@ def import_tweets(filename, date_col, text_col):
     :return: A data frame containing the date and time, the text of the tweet
     """
     # import data from csv file via pandas library
-    #tweet_dataset = pd.read_csv(filename, encoding='utf-8', header=0)
-    #tweet_dataset.to_pickle("./intermediate/pickled_tweets.pkl")
+    # tweet_dataset = pd.read_csv(filename, encoding='utf-8', header=0)
+    # tweet_dataset.to_pickle("./intermediate/pickled_tweets.pkl")
 
     tweet_dataset = pd.read_pickle("./intermediate/pickled_tweets.pkl")
     tweet_dataset.sort_values(by=['date'], inplace=True)
@@ -24,7 +25,6 @@ def import_tweets(filename, date_col, text_col):
     tweet_dataset.drop(tweet_dataset.columns.difference([text_col]), 1, inplace=True)
 
     tweet_dataset.columns = ['Text']
-
 
     return tweet_dataset
 
@@ -55,9 +55,6 @@ def analyze_tweets(tweet_dataset):
     """
     sid = SentimentIntensityAnalyzer()
     sentiment_scores = []
-    import time
-    timer1 = 0
-    timer2 = 0
 
     print(tweet_dataset)
 
@@ -67,44 +64,43 @@ def analyze_tweets(tweet_dataset):
 
     print("Total to process: " + str(len(tweet_text)))
 
-
-    # for index, row in tweet_dataset.iterrows():
     for index, text in enumerate(tweet_text):
-        if index%100000 == 0:
-            print(str(index/total_tweets) + "% processed so far")
-        #    print('{}\n{}\n'.format(timer1, timer2))
-        #start = time.time()
-        #text = str(row['Text'])
-
+        if index % 100000 == 0:
+            print(str(index / total_tweets * 100) + "% processed so far")
         score = sid.polarity_scores(text)
-        #timer1 += time.time() - start
-        #start = time.time()
-
         sentiment_scores.append(score['compound'])
 
-        #timer2 += time.time() - start
     tweet_dataset['Sentiment'] = sentiment_scores
     return tweet_dataset
 
+
 def get_hourly_sentiment(tweet_dataset):
     """
-    Sums the sentiment score by hour
+    Computes the mean the sentiment score by hour and normalizes the data
     :param tweet_dataset: the dataframe that we want to find the hourly sentiment score of
     :return: the dataframe with the mean score for the hour
     """
 
     tweet_dataset = tweet_dataset.resample('H').mean()
 
-    tweet_dataset = tweet_dataset.fillna(0.0)
-
     return tweet_dataset
 
 
-if __name__ == "__main__":
+def noramlize_data(df):
+    """
+    Normalizes the data by subtracting the mean and dividing by the max - min.
+    :param df: the dataframe that we are normalizing
+    :return: the normalized dataframe
+    """
 
-    #tweet_dataset = import_tweets("/Users/stenzel/Documents/EECE2300/cryptoanalyzer/src/data/raw/BitcoinTweets.csv", "date", "text")
+    df_normalized = (df - df.mean()) / (df.max() - df.min())
+
+    return df_normalized
+
+if __name__ == "__main__":
+    # tweet_dataset = import_tweets("/Users/stenzel/Documents/EECE2300/cryptoanalyzer/src/data/raw/BitcoinTweets.csv", "date", "text")
     print("tweets imported")
-    #tweet_dataset['Text'] = tweet_dataset['Text'].apply(preprocess_tweet)
+    # tweet_dataset['Text'] = tweet_dataset['Text'].apply(preprocess_tweet)
 
     tweet_dataset = pd.read_pickle("./intermediate/pickled_tweets_preprocessed.pkl")
     print("tweets preprocessed")
@@ -112,13 +108,7 @@ if __name__ == "__main__":
     tweet_dataset = analyze_tweets(tweet_dataset)
     print("tweets analyzed")
 
-    #tweet_dataset.to_csv('small_processed_bitcoin-twitter.csv', sep=',')
-
-    #tweet_dataset = pd.read_csv("intermediate/small_processed_bitcoin-twitter.csv", encoding='utf-8')
-
-    #tweet_dataset = pd.read_csv("intermediate/BitcoinTweets.csv", encoding='utf-8')
-
-    #tweet_dataset = get_hourly_sentiment(tweet_dataset)
+    # tweet_dataset = get_hourly_sentiment(tweet_dataset)
 
     tweet_dataset.to_csv('proccesed_BitcoinTweets.csv', sep=',')
 

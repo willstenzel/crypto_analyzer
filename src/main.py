@@ -1,8 +1,9 @@
 import argparse
 from src.data import twitterAnalyzer, cleanPriceData
 from src.visualization import visualize_model
-
+from sklearn import preprocessing
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 parser = argparse.ArgumentParser(description='Predicton based on twitter sentiment analysis.',
@@ -29,16 +30,21 @@ price_data = args.price_data
 
 
 ## For testing purposes
-tweet_df = pd.read_csv("data/Itermediate/twitter-data-with-sentiment.csv", encoding='utf-8')
+#tweet_df = pd.read_csv("data/intermediate/small_processed_bitcoin-twitter.csv", encoding='utf-8')
 # data set from: https://www.kaggle.com/gwhittington/bitcointwitter
-tweet_df = tweet_df.set_index(pd.DatetimeIndex(tweet_df['Date']))
+
+
+tweet_df = pd.read_pickle("data/intermediate/proccesed_BitcoinTweets.pkl")
+tweet_df = tweet_df.set_index(pd.DatetimeIndex(tweet_df['date']))
 tweet_df = twitterAnalyzer.get_hourly_sentiment(tweet_df)
-price_df = pd.read_csv("data/Itermediate/cleaned_price_data.csv", encoding='utf-8')
+tweet_df = twitterAnalyzer.noramlize_data(tweet_df)
+
+print("normalized tweets")
+
+price_df = pd.read_pickle("data/intermediate/cleaned_price_data.pkl")
 price_df = price_df.set_index(pd.DatetimeIndex(price_df['Date']))
 price_df = price_df.drop('Date', 1)
 
-print(tweet_df)
-print(price_df)
 
 # Evaluate model
 visualize_model.graph_price_seniment(tweet_df, price_df)
