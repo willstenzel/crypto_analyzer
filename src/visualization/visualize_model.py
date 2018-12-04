@@ -50,8 +50,3 @@ def graph_price_seniment(sentiment, price):
 
 
 
-if __name__ == "__main__":
-
-    twitter_data = 'data/raw/bitcoin-twitter.csv'
-
-    price_data = 'data/raw/Bittrex_BTCUSD_1h.csv'
