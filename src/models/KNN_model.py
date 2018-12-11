@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     # create a composite data frame and canadians both the price and sentient data
     composite_df = pd.concat([tweet_df, price_df], axis=1)
-
+    print(composite_df)
     # split the data into a training and testing
     train, test = train_test_split(composite_df, test_size=0.3)
 
@@ -71,7 +71,15 @@ if __name__ == "__main__":
         model = neighbors.KNeighborsRegressor(n_neighbors=k)
         error = regression_model(model, x_train, y_train, x_test, y_test)
         mse_val.append(error)
-        print('RMSE value for k= ', k, 'is:', error)
+        #print('RMSE value for k= ', k, 'is:', error)
 
-    plt.plot(range(1, 51), mse_val)
+    # initialize a new figure
+    fig, ax = plt.subplots()
+
+    plt.title('K-Nearest Neighbors: MSE vs K value', y=1.00)
+    ax.plot(range(1, 51), mse_val)
+
+    # set labels
+    ax.set_xlabel("K Value")
+    ax.set_ylabel("Mean Squared Error")
     plt.show()
