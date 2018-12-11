@@ -39,7 +39,6 @@ tweet_df = tweet_df.set_index(pd.DatetimeIndex(tweet_df['date']))
 tweet_df = twitterAnalyzer.get_hourly_sentiment(tweet_df)
 tweet_df = twitterAnalyzer.noramlize_data(tweet_df)
 
-print("normalized tweets")
 
 price_df = pd.read_pickle("data/intermediate/cleaned_price_data.pkl")
 price_df = price_df.set_index(pd.DatetimeIndex(price_df['Date']))
@@ -49,4 +48,5 @@ price_df = price_df.drop('Date', 1)
 # Evaluate model
 visualize_model.graph_price_seniment(tweet_df, price_df)
 
-# TODO ???
+
+
