@@ -72,12 +72,13 @@ def splot(sentiments, pct_changes, hours_offset):
 
     sentiments = sentiments.iloc[0:ind[-1] + 1, 0]
     pct_changes = pct_changes.iloc[hours_offset:, 0]
-    #
-    # ax.set_xlabel("Sentiment Scores")
-    # if hours_offset == 1:
-    #     ax.set_ylabel("Percent Change in Price over the next Hour")
-    # else:
-    #     ax.set_ylabel("Percent Change in Price over the next " + str(hours_offset) + " Hours")
+
+    plt.title("Percent Change vs. Sentiment")
+    plt.xlabel("Sentiment Scores")
+    if hours_offset == 1:
+        plt.ylabel("Percent Change in Price over the next Hour")
+    else:
+        plt.ylabel("Percent Change in Price over the next " + str(hours_offset) + " Hours")
 
     plt.scatter(sentiments, pct_changes, s=5)
     plt.show()
@@ -129,10 +130,10 @@ if __name__ == "__main__":
     # tweet_df = tweet_df.set_index(pd.DatetimeIndex(tweet_df['date']))
     # tweet_df = twitterAnalyzer.get_hourly_sentiment(tweet_df)
     # tweet_df = twitterAnalyzer.noramlize_data(tweet_df)
-    tweet_df = pd.read_pickle("data/intermediate/proccesed_normalized_BitcoinTweets.pkl")
+    tweet_df = pd.read_pickle("/Users/maxhopley/Documents/EECE2300/crypto_analyzer/src/data/intermediate/proccesed_normalized_BitcoinTweets.pkl")
     # print("2017-12-12 15:00:00" in tweet_df.index)
 
-    price_df = pd.read_pickle("data/intermediate/cleaned_price_data.pkl")
+    price_df = pd.read_pickle("/Users/maxhopley/Documents/EECE2300/crypto_analyzer/src/data/intermediate/cleaned_price_data.pkl")
     price_df = price_df.set_index(pd.DatetimeIndex(price_df['Date']))
     price_df = price_df.drop('Date', 1)
     price_df = price_df.iloc[::-1]
