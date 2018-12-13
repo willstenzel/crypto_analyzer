@@ -22,14 +22,10 @@ def graph_price_seniment(sentiment, price):
     price = price[startTime:sentiment.index[-1]]
     sentiment = sentiment[startTime:]
 
-    # scale the sentiment to better match the price values
-
-    # create a plot of the sentiment as a bar plot and the price as a line plot
-
     # Plot graph with 2 y axes
     fig, ax1 = plt.subplots()
 
-    # Plot Line
+    # Plot price as line
     ax1.plot(price.index, price, 'r-')
     # Set the x-axis label
     ax1.set_xlabel('Time')
@@ -39,14 +35,12 @@ def graph_price_seniment(sentiment, price):
 
     # Set up ax2 to be the second y axis with x shared
     ax2 = ax1.twinx()
-    # Plot a Bar
+    # Add bar plot for the sentiment
     ax2.bar(sentiment.index, sentiment, width=0.04, alpha=.5)
     ax2.set_ylim(sentiment.min() * 1.1, sentiment.max() * 1.1)
 
     plt.show()
 
-    print(price)
-    print(sentiment)
 
 
 

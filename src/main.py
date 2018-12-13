@@ -11,7 +11,6 @@ parser = argparse.ArgumentParser(description='Predicton based on twitter sentime
 parser.add_argument('twitter_data', type=str, help='csv file contains twitter data.')
 parser.add_argument('price_data', type=str, help='csv file contains price history data.')
 args = parser.parse_args()
-# TODO add flags
 
 twitter_data = args.twitter_data
 price_data = args.price_data

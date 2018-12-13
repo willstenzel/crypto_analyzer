@@ -6,16 +6,6 @@ Machine Learning algorithmic analysis for Crytpocurrencies
 
 **Version 0.1**
 
-## Installation
-
-
-## Todos
-- Draft API Skeleton
-- Implement data processing components
-
-
-## Experiments
-- TODO
 
 
 ## Authors
@@ -75,7 +65,4 @@ Project Organization
 
 
 
-
-
     * Free software: MIT license
-    * Documentation: https://cryptoanazylerproject.readthedocs.io.

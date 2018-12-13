@@ -10,20 +10,11 @@ price_df = price_df.drop('Date', 1)
 price_df = price_df.iloc[::-1]
 
 
-# # Get the time of the data set that begins latest
-# # startTime = max(tweet_df.index[0], price_df.index[0])
-# #
-# # # keep only rows that have the share the same date times
-# # price_df = price_df[startTime:tweet_df.index[-1]]
-# # tweet_df = tweet_df[startTime:]
-
-
 offset = range(24)
 correlations = []
 for i in offset:
 	print("Offset: " + str(i))
 	pct_change_df = pct_change_calculator.pct_change(price_df, "2017-07-01 11:00:00", "2018-03-12 19:00:00", i)
-	# pct_change_df = pct_change_calculator.pct_change(price_df, "2017-07-01 11:00:00", "2017-10-12 19:00:00", i)
 	corr = pct_change_calculator.correlation(tweet_df, pct_change_df, i)
 	correlations.append(corr[0, 1])
 
