@@ -2,7 +2,7 @@
 ## Crypto_Anazyler
 
 
-Machine Learning algorithmic analysis for Crytpocurrencies
+Cryptocurrency value prediction project with sentiment analysis 
 
 **Version 0.1**
 
@@ -17,6 +17,11 @@ Shivam Kollur - [Github](https://github.com/srkollur)
 Max Hopley - [Github](https://github.com/mhopley)
 
 
+## Data Sources
+
+Bitcoin Dataset: https://www.cryptodatadownload.com/index.html
+
+Twitter Dataset: https://www.kaggle.com/augiedoebling/bitcoin-tweets
 
 
 Project Organization
