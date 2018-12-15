@@ -48,9 +48,9 @@ Project Organization
     │    │
     │    └── visualizations     <- Generated graphics and figures to be used in reporting
     │
-    ├─ Final Presentation.pptx  <- Our final presentaion
+    ├─ FinalPresentation.pptx   <- Our final presentaion
     │
-    └─ Final Report.pdf         <- Our final report
+    └─ FinalReport.pdf          <- Our final report
     
     
     * Free software: MIT license
