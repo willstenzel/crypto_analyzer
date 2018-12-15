@@ -1,5 +1,5 @@
 
-## Crypto_Anazyler
+## crypto_analyzer
 
 
 Cryptocurrency value prediction project with sentiment analysis 
