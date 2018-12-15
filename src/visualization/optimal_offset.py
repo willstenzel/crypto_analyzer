@@ -10,7 +10,7 @@ price_df = price_df.drop('Date', 1)
 price_df = price_df.iloc[::-1]
 
 
-offset = range(24)
+offset = range(0, 150, 5)
 correlations = []
 for i in offset:
 	print("Offset: " + str(i))
@@ -24,7 +24,7 @@ print(correlations)
 fig, ax = plt.subplots()
 
 plt.title('Correlation Over Different Hour Offsets', y=1.00)
-ax.plot(range(len(correlations)), correlations)
+ax.plot(offset, correlations)
 
 # set labels
 ax.set_xlabel("Hours Offset")
