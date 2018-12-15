@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-from src.visualization import visualize_model
-from src.data import twitterAnalyzer
 import matplotlib.pyplot as plt
 
 # earliest possible start and end dates in both datasets: "2017-07-01 11:00:00", "2018-03-12 19:00:00"
